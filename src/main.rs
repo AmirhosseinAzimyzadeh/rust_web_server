@@ -17,6 +17,9 @@ fn main() {
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
-        pool.run();
+        pool.run(||{
+            thread::sleep(std::time::Duration::from_secs(5));
+            connection::handler(stream);
+        });
     }
 }
