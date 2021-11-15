@@ -1,4 +1,5 @@
 use std::net::TcpListener;
+mod connection;
 
 const PORT: &str = "7878";
 const ADDRESS: &str = "127.0.0.1";
@@ -10,6 +11,6 @@ fn main() {
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
-        println!("Connection Stablished: {:?}",stream)
+        connection::handler(stream);
     }
 }
