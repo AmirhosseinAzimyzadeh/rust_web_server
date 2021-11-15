@@ -3,9 +3,13 @@ pub enum Response {
     NotFound,
 }
 
-pub fn create_response(res_type: Response) -> String {
+pub fn create_response(res_type: Response, contents: String) -> String {
   match res_type {
-      Response::OK => String::from("HTTP/1.1 200 OK\r\n\r\n"),
+      Response::OK => format!(
+        "HTTP/1.1 200 OK\r\nContent-Length: {}\r\n\r\n{}",
+        contents.len(),
+        contents,
+      ),
       Response::NotFound => String::from("HTTP/1.1 404 NOT FOUND\r\n\r\n")
   }
 }
