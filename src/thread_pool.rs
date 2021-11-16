@@ -1,3 +1,19 @@
+use std::thread::JoinHandle;
+
+struct Worker {
+  id: usize,
+  join_handle: JoinHandle<()>,
+}
+
+impl Worker {
+  fn new(id: usize, join_handle: JoinHandle<()>) -> Worker {
+    Worker {
+      id,
+      join_handle,
+    }
+  }
+}
+
 pub struct ThreadPool {
   max_threads: usize,
 }
